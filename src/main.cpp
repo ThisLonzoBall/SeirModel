@@ -52,26 +52,30 @@ int main(){
 
     P2_simulation model2(N , beta, sigma, gamma, L , seed);
 
-    system("mkdir -p results");
+    std::ofstream snapshotfile("results/snapshots.txt");
+    if (!snapshotfile){
+        std::cerr << "Error opening file\n";
+        return 1;
+    }
+    snapshotfile <<"step,x,y,state\n";
+    
+    model2.run(n_steps, snapshotfile);
+    
     std::string filename2 = "results/p2_output.txt";
     std::ofstream outfile2(filename2);
     if (!outfile2){
         std::cerr << "Error opening file" <<filename2 << "\n";
         return 1;
     }
+    
     outfile2 << "step,susceptible,exposed,infected,recovered\n";
     
-    outfile2 << 0 << "," << model2.S << "," << model2.E << ","
-             << model2.I << "," << model2.R << "\n";
-
-    for (int step = 1; step <= n_steps; step++) {
-
-        model2.step();
+    for(int step=0; step <= n_steps; step++){
         outfile2 << step << ","
-             << model2.S << ","
-             << model2.E << ","
-             << model2.I << ","
-             << model2.R<< "\n";
+        << model2.S_arr[step] << ","
+        << model2.E_arr[step] << ","
+        << model2.I_arr[step] << ","
+        << model2.R_arr[step] << "\n";
     }
 
     return 0;

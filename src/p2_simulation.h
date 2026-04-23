@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <random>
+#include <fstream>
 
 #include "agent.h"
 #include "lattice.h"
@@ -16,11 +17,13 @@ public:
 
     Lattice lattice;
     std::vector<Agent> agents;
-    
+
     std::mt19937 rng;
     std::uniform_real_distribution<double> uniform_dist;
 
     int S,E,I,R;
+
+    std::vector<int> S_arr, E_arr, I_arr, R_arr;
     
     void initAgents();
     double uniform();
@@ -29,7 +32,10 @@ public:
     void changeState(Agent& agent, int new_state);
 
     P2_simulation(int N, double beta, double sigma, double gamma, int L, int seed);
+
+    void saveSnapshot(std::ofstream& snapshotfile, int step);
     void step();
+    void run(int n_steps, std::ofstream& snapshotfile);
 
 };
 

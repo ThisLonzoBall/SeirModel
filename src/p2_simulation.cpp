@@ -9,6 +9,11 @@ P2_simulation::P2_simulation(int N, double beta, double sigma, double gamma, int
     S(0), E(0), I(0), R(0)
     {
     initAgents(); 
+
+    S_arr.push_back(S);
+    E_arr.push_back(E);
+    I_arr.push_back(I);
+    R_arr.push_back(R);
 }
 
 double P2_simulation::uniform() {
@@ -109,5 +114,24 @@ void P2_simulation::step() {
 
     }
 }
+    void P2_simulation::saveSnapshot(std::ofstream& snapshotfile, int step){
+        for (Agent& agent : agents){
+            snapshotfile << step << "," << agent.x << ","<< agent.y << "," << agent.state <<"\n";
+        }
+    }
+
+    void P2_simulation::run(int n_steps, std::ofstream& snapshotfile){
+        for(int k=1; k <= n_steps; k++){
+            step();
+            S_arr.push_back(S);
+            E_arr.push_back(E);
+            I_arr.push_back(I);
+            R_arr.push_back(R);
+            if (k == 100 || k == 500 || k == 1000 || k== n_steps){
+                saveSnapshot(snapshotfile,k);
+            }
+        }
+    }
+
 
 
