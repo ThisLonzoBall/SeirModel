@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
     std::string mode = argv[1];
 
     if (mode == "P1"){
-        if(argc < 6){
+        if(argc < 5){
             std::cerr <<"Usage:" << argv[0]  
                 << "P1 <beta> <sigma> <gamma> [n_steps] [s0] [e0] [i0] [r0]\n";
             return 1;  
@@ -32,6 +32,43 @@ int main(int argc, char* argv[]){
         double e0 = (argc >= 8) ? std::stod(argv[7]) : 0.01;
         double i0 = (argc >= 9) ? std::stod(argv[8]) : 0.0;
         double r0 = (argc >= 10) ? std::stod(argv[9]) : 0.0;
+
+        if (beta < 0.0){
+            std::cerr << "Beta must be >=0\n";
+            return 1;
+        }
+        if (sigma < 0.0){
+            std::cerr << "Sigma must be >=0\n";
+            return 1;
+        }
+        if (gamma < 0.0){
+            std::cerr << "Gamma must be >=0\n";
+            return 1;
+        }
+        if (n_steps < 1 || n_steps > 1e7){
+            std::cerr << "n_steps must be between 1 and 1e7\n";
+            return 1;
+        }
+        if (s0 < 0){
+            std::cerr << "s0 must be >=0 \n";
+            return 1;
+        }
+        if (e0 < 0){
+            std::cerr << "e0 must be >=0 \n";
+            return 1;
+        }
+        if (i0 < 0){
+            std::cerr << "i0 must be >=0 \n";
+            return 1;
+        }
+        if (r0 < 0){
+            std::cerr << "r0 must be >=0 \n";
+            return 1;
+        }
+        if (s0 + e0 + i0 + r0 > 1.0 + 1e-8){
+            std::cerr << "Initial proportions must sum to 1 \n";
+            return 1;
+        }
 
         double tmax = 100.0;
         double dt = tmax/ n_steps;
@@ -74,6 +111,28 @@ int main(int argc, char* argv[]){
         int L = 100;
         int n_steps = 2000;
 
+        if (beta < 0.0 || beta > 1.0){
+            std::cerr << "Beta must be between 0 and 1\n";
+            return 1;
+        }
+        if (sigma < 0.0 || sigma > 1.0){
+            std::cerr << "Sigma must be between 0 and 1\n";
+            return 1;
+        }
+        if (gamma < 0.0 || gamma > 1.0){
+            std::cerr << "Gamma must be between 0 and 1\n";
+            return 1;
+        }
+        if (N < 1){
+            std::cerr << "N must be >=1\n";
+            return 1;
+        }
+        if (N > L*L){
+            std::cerr << "N must be <= L squared\n";
+            return 1;
+        }
+
+
         P2_simulation model2(N, beta, sigma, gamma, L ,seed);
 
         system("mkdir -p results");
@@ -99,7 +158,7 @@ int main(int argc, char* argv[]){
         }
         
         outfile_p2 << "step,susceptible,exposed,infected,recovered\n";
-        
+
         model2.run(n_steps, snapshotfile);
         model2.saveResults(n_steps, outfile_p2);
 
