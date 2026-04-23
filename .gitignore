@@ -3,4 +3,5 @@
 results/
 *.exe
 *.txt
+*.o
 seir_sim
