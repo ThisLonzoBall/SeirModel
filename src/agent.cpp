@@ -14,3 +14,15 @@ void Agent::updatePosition(int new_x, int new_y){
     x = new_x;
     y = new_y;
 }
+
+int Agent::getState(){
+    return state;
+}
+
+int Agent::getX(){
+    return x;
+}
+
+int Agent::getY(){
+    return y;    
+}

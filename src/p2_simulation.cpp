@@ -26,12 +26,12 @@ int P2_simulation::randint(int min, int max){
 }
 
 void P2_simulation::tryMove(Agent& agent, int new_x, int new_y){
-    lattice.moveAgent(agent.x, agent.y, new_x, new_y, agent.state);
+    lattice.moveAgent(agent.getX(), agent.getY(), new_x, new_y, agent.getState());
     agent.updatePosition(new_x, new_y);
 }
 
  void P2_simulation::changeState(Agent& agent, int newstate){
-    lattice.updateAgent(agent.x, agent.y, newstate);
+    lattice.updateAgent(agent.getX(), agent.getY(), newstate);
     agent.updateState(newstate);
  }
 
@@ -76,29 +76,29 @@ void P2_simulation::step() {
         int dx = directions[dir][0];
         int dy = directions[dir][1];
 
-        int updated_x = (agent.x + dx + lattice.L) % lattice.L ;
-        int updated_y = (agent.y + dy + lattice.L) % lattice.L ;
+        int updated_x = (agent.getX() + dx + lattice.L) % lattice.L ;
+        int updated_y = (agent.getY() + dy + lattice.L) % lattice.L ;
 
         if (lattice.isEmpty(updated_x, updated_y)) {
             tryMove(agent,updated_x ,updated_y);
         }
 
-        if (agent.state == Exposed){
+        if (agent.getState() == Exposed){
             if (uniform() < sigma){
                 changeState(agent, Infected);
                 I += 1; 
                 E -= 1;
             }
         }
-        else if (agent.state == Infected){
+        else if (agent.getState() == Infected){
             if (uniform() < gamma){
                 changeState(agent, Recovered);
                 I -= 1;
                 R += 1;
             }
         }
-        else if (agent.state== Susceptible) {
-            int infected_neighbours = lattice.countInfectedNeighbours(agent.x , agent.y);
+        else if (agent.getState()== Susceptible) {
+            int infected_neighbours = lattice.countInfectedNeighbours(agent.getX() , agent.getY());
 
             for(int k=0; k < infected_neighbours; k++){
                 if (uniform() < beta){
@@ -116,7 +116,7 @@ void P2_simulation::step() {
 }
     void P2_simulation::saveSnapshot(std::ofstream& snapshotfile, int step){
         for (Agent& agent : agents){
-            snapshotfile << step << "," << agent.x << ","<< agent.y << "," << agent.state <<"\n";
+            snapshotfile << step << "," << agent.getX() << ","<< agent.getY() << "," << agent.getState() <<"\n";
         }
     }
 
