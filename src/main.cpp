@@ -20,27 +20,15 @@ int main(){
     P1_simulation model(beta, sigma, gamma, s0, e0, i0, r0, dt);
 
     system("mkdir -p results");
-    std::string filename = "results/p1_output.txt";
-    std::ofstream outfile(filename);
-    if (!outfile){
-        std::cerr << "Error opening file" <<filename << "\n";
+    std::string filename1 = "results/p1_output.txt";
+    std::ofstream outfile1(filename1);
+    if (!outfile1){
+        std::cerr << "Error opening file" <<filename1 << "\n";
         return 1;
     }
-    outfile << "t,susceptible,exposed,infected,recovered\n";
+    outfile1 << "t,susceptible,exposed,infected,recovered\n";
+    model.run(n_steps, outfile1);
     
-    outfile << model.t << "," << model.s << "," << model.e << ","
-             << model.i << "," << model.r << "\n";
-
-    for (int step = 1; step <= n_steps; step++) {
-
-        model.euler_step();
-        outfile << model.t << ","
-             << model.s << ","
-             << model.e << ","
-             << model.i << ","
-             << model.r << "\n";
-    }
-
     beta = 1.0;
     sigma = 0.1;
     gamma = 0.005;

@@ -1,18 +1,23 @@
 #ifndef P1_SIMULATION_H
 #define P1_SIMULATION_H
 
+#include <fstream>
+
 class P1_simulation {
-public:
-    
+
+private:
+
     double beta, sigma, gamma;
     double dt;
     double s,e, i, r;
     double t;
 
+public:
     P1_simulation(double beta, double sigma, double gamma, 
                 double s0, double e0, double i0, double r0, double dt);
     
     void euler_step();
+    void run(int n_steps, std::ofstream& outfile);
 };
 
 #endif // P1_SIMULATION_H

@@ -18,3 +18,12 @@ void P1_simulation::euler_step() {
 
     t += dt;
 }
+
+void P1_simulation::run(int n_steps, std::ofstream& outfile){
+    outfile << t << "," << s << "," << e << "," << i << "," << r << "\n";
+    for (int step = 1; step <= n_steps; step++) {
+        euler_step();
+        outfile << t << ","<< s << ","<< e << ","<< i << ","<< r << "\n";
+    }
+
+}
