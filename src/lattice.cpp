@@ -35,3 +35,7 @@ int Lattice::countInfectedNeighbours(int x, int y){
     }
     return count;
 }
+
+int Lattice::getL(){
+    return L;
+}

@@ -42,8 +42,8 @@ void P2_simulation::tryMove(Agent& agent, int new_x, int new_y){
         int x,y;
         
         do {
-            x = randint(0, lattice.L-1);
-            y = randint(0, lattice.L-1);
+            x = randint(0, lattice.getL()-1);
+            y = randint(0, lattice.getL()-1);
         } while(!lattice.isEmpty(x,y));
 
         int state = Susceptible;
@@ -76,8 +76,8 @@ void P2_simulation::step() {
         int dx = directions[dir][0];
         int dy = directions[dir][1];
 
-        int updated_x = (agent.getX() + dx + lattice.L) % lattice.L ;
-        int updated_y = (agent.getY() + dy + lattice.L) % lattice.L ;
+        int updated_x = (agent.getX() + dx + lattice.getL()) % lattice.getL();
+        int updated_y = (agent.getY() + dy + lattice.getL()) % lattice.getL();
 
         if (lattice.isEmpty(updated_x, updated_y)) {
             tryMove(agent,updated_x ,updated_y);

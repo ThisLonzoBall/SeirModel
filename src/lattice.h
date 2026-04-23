@@ -4,10 +4,11 @@
 #include <vector>
 
 class Lattice{
-public:
+private:
     int L;
     std::vector<std::vector<int>> grid;
 
+public:
     Lattice(int L);
 
     bool isEmpty(int x, int y);
@@ -16,6 +17,8 @@ public:
     void updateAgent(int x, int y, int new_state);
 
     int countInfectedNeighbours(int x , int y);
+
+    int getL();
 
 };
 
