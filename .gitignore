@@ -2,4 +2,9 @@
 .vscode/
 results/
 *.exe
+<<<<<<< HEAD
 *.txt
+=======
+*.txt
+seir_sim
+>>>>>>> p2
