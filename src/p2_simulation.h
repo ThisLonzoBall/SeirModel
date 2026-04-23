@@ -1,0 +1,36 @@
+#ifndef P2_SIMULATION_H
+#define P2_SIMULATION_H
+
+#include <vector>
+#include <random>
+
+#include "agent.h"
+#include "lattice.h"
+
+class P2_simulation {
+public:
+    int N;
+    double beta;
+    double sigma;
+    double gamma;
+
+    Lattice lattice;
+    std::vector<Agent> agents;
+    
+    std::mt19937 rng;
+    std::uniform_real_distribution<double> uniform_dist;
+
+    int S,E,I,R;
+    
+    void initAgents();
+    double uniform();
+    int randint(int min, int max);
+    void tryMove(Agent& agent, int new_x, int new_y);
+    void changeState(Agent& agent, int new_state);
+
+    P2_simulation(int N, double beta, double sigma, double gamma, int L, int seed);
+    void step();
+
+};
+
+#endif // P2_SIMULATION_H
