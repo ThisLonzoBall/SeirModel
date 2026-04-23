@@ -94,6 +94,8 @@ int main(int argc, char* argv[]){
         model1.run(n_steps, outfile_p1);
 
         outfile_p1.close();
+
+        std::cout << "ODE simulation complete. Results written to "<<filename<< "\n";
     }
     else if (mode=="P2"){
         if(argc < 5){
@@ -164,6 +166,8 @@ int main(int argc, char* argv[]){
 
         snapshotfile.close();
         outfile_p2.close();
+
+        std::cout << "Monte Carlo simulation complete. Results written to "<<filename<< ".Snapshots written to results/snapshots.txt\n";
     }
 
     else {
