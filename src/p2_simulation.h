@@ -9,7 +9,7 @@
 #include "lattice.h"
 
 class P2_simulation {
-public:
+private:
     int N;
     double beta;
     double sigma;
@@ -31,9 +31,12 @@ public:
     void tryMove(Agent& agent, int new_x, int new_y);
     void changeState(Agent& agent, int new_state);
 
+public: 
+
     P2_simulation(int N, double beta, double sigma, double gamma, int L, int seed);
 
     void saveSnapshot(std::ofstream& snapshotfile, int step);
+    void saveResults(int n_steps, std::ofstream& outfile);
     void step();
     void run(int n_steps, std::ofstream& snapshotfile);
 

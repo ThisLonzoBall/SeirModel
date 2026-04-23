@@ -46,9 +46,7 @@ int main(){
         return 1;
     }
     snapshotfile <<"step,x,y,state\n";
-    
-    model2.run(n_steps, snapshotfile);
-    
+
     std::string filename2 = "results/p2_output.txt";
     std::ofstream outfile2(filename2);
     if (!outfile2){
@@ -58,13 +56,8 @@ int main(){
     
     outfile2 << "step,susceptible,exposed,infected,recovered\n";
     
-    for(int step=0; step <= n_steps; step++){
-        outfile2 << step << ","
-        << model2.S_arr[step] << ","
-        << model2.E_arr[step] << ","
-        << model2.I_arr[step] << ","
-        << model2.R_arr[step] << "\n";
-    }
+    model2.run(n_steps, snapshotfile);
+    model2.saveResults(n_steps, outfile2);
 
     return 0;
 

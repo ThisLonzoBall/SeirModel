@@ -114,13 +114,13 @@ void P2_simulation::step() {
 
     }
 }
-    void P2_simulation::saveSnapshot(std::ofstream& snapshotfile, int step){
+void P2_simulation::saveSnapshot(std::ofstream& snapshotfile, int step){
         for (Agent& agent : agents){
             snapshotfile << step << "," << agent.getX() << ","<< agent.getY() << "," << agent.getState() <<"\n";
         }
-    }
+}
 
-    void P2_simulation::run(int n_steps, std::ofstream& snapshotfile){
+void P2_simulation::run(int n_steps, std::ofstream& snapshotfile){
         for(int k=1; k <= n_steps; k++){
             step();
             S_arr.push_back(S);
@@ -131,7 +131,19 @@ void P2_simulation::step() {
                 saveSnapshot(snapshotfile,k);
             }
         }
+}
+
+void P2_simulation::saveResults(int n_steps, std::ofstream& outfile){
+    for(int step=0; step <= n_steps; step++){
+        outfile << step << ","
+        << S_arr[step] << ","
+        << E_arr[step] << ","
+        << I_arr[step] << ","
+        << R_arr[step] << "\n";
     }
+}
+
+
 
 
 
