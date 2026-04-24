@@ -5,3 +5,4 @@ results/
 *.txt
 *.o
 seir_sim
+__pycache__/
