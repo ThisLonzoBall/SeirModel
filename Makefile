@@ -13,4 +13,4 @@ $(EXEC): $(OBJ)
 
 clean: 
 	rm -f $(EXEC) $(OBJ) 
-	rm -rf results/
+	rm -rf results/ visualisations/
