@@ -10,7 +10,7 @@ def load(path):
     return pd.read_csv(path)
 
 def plot_p1(df, output_file):
-    fig, ax = plt.subplots(figsize=(10,8))
+    fig, ax = plt.subplots(figsize=(7,4))
     ax.plot(df["t"],df["susceptible"] , label='Susceptible')
     ax.plot(df["t"], df["exposed"], label='Exposed')
     ax.plot(df["t"], df["infected"], label='Infected')
@@ -20,15 +20,16 @@ def plot_p1(df, output_file):
     ax.set_xlabel('Time (days)')
     ax.set_ylabel('Population Fraction')
     ax.set_title('ODE SEIR Simulation')
-    ax.legend(loc="upper right")
+    ax.legend()
     ax.grid()
     
+    fig.tight_layout()
     fig.savefig(output_file)
     plt.close()
     return fig 
 
 def plot_p2(df, output_file):
-    fig, ax = plt.subplots(figsize=(10,8))
+    fig, ax = plt.subplots(figsize=(7,4))
     ax.plot(df["step"], df["susceptible"], label="Susceptible")
     ax.plot(df["step"], df["exposed"], label="Exposed")
     ax.plot(df["step"], df["infected"], label="Infected")
@@ -37,9 +38,10 @@ def plot_p2(df, output_file):
     ax.set_xlabel("Monte Carlo Step")
     ax.set_ylabel("Population")
     ax.set_title(f"Monte Carlo SEIR Simulation")
-    ax.legend(loc="upper right")
+    ax.legend()
     ax.grid()
 
+    fig.tight_layout()
     fig.savefig(output_file)
     plt.close()
     return fig 
@@ -53,7 +55,7 @@ def plot_snapshots(df):
         infected = step_df[step_df["state"] == 3]
         recovered = step_df[step_df["state"] == 4]
 
-        fig, ax = plt.subplots(figsize=(10,8))
+        fig, ax = plt.subplots(figsize=(5,5))
         ax.scatter(susceptible["x"], susceptible["y"], color= "blue", label= "Susceptible", s=20)
         ax.scatter(exposed["x"], exposed["y"], color= "orange", label= "Exposed", s=20)
         ax.scatter(infected["x"], infected["y"], color= "green", label= "Infected", s=20)
@@ -63,8 +65,9 @@ def plot_snapshots(df):
         ax.set_ylabel("y position")
 
         ax.set_title(f"Monte Carlo SEIR Simulation (step {int(step)})")
-        ax.legend(loc = "upper right")
-    
+        ax.legend(loc="upper right")
+
+        fig.tight_layout()
         fig.savefig(os.path.join(output_dir,f"snapshot_{int(step)}.png"))
         plt.close()
 

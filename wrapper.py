@@ -21,6 +21,8 @@ class P1_Wrapper:
 
         result = subprocess.run(command, capture_output=True, text=True)
         return result
+    def filename(self):
+        return f"results/p1_beta{self.beta:.2f}_sigma{self.sigma:.2f}_gamma{self.gamma:.2f}.txt"
 
 
 class P2_Wrapper:
@@ -38,4 +40,6 @@ class P2_Wrapper:
                    str(self.N), str(self.seed)]
         result = subprocess.run(command, capture_output=True, text=True)
         return result
+    def filename(self):
+        return f"results/p2_beta{self.beta:.3f}_sigma{self.sigma:.3f}_gamma{self.gamma:.3f}_N{self.N}.txt"
 

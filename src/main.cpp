@@ -147,7 +147,7 @@ int main(int argc, char* argv[]){
         snapshotfile <<"step,x,y,state\n";
 
         std::ostringstream stream;
-        stream << std::fixed << std::setprecision(2);
+        stream << std::fixed << std::setprecision(3);
         stream << "results/p2_beta"<< beta << "_sigma" << sigma << "_gamma" <<gamma <<"_N" << N
         << ".txt";
 
