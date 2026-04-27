@@ -27,3 +27,19 @@ void P1_simulation::run(int n_steps, std::ofstream& outfile){
     }
 
 }
+
+double P1_simulation::gets(){
+    return s;
+}
+
+double P1_simulation::gete(){
+    return e;
+}
+
+double P1_simulation::geti(){
+    return i;
+}
+
+double P1_simulation::getr(){
+    return r;
+}

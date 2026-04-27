@@ -41,6 +41,12 @@ public:
     void step();
     void run(int n_steps, std::ofstream& snapshotfile);
 
+    int getS();
+    int getE();
+    int getI();
+    int getR();
+    int getN();
+
 };
 
 #endif // P2_SIMULATION_H

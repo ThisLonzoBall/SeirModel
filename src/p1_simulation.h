@@ -18,6 +18,11 @@ public:
     
     void euler_step();
     void run(int n_steps, std::ofstream& outfile);
+
+    double gets();
+    double gete();
+    double geti();
+    double getr();
 };
 
 #endif // P1_SIMULATION_H

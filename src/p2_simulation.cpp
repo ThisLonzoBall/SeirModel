@@ -159,7 +159,21 @@ void P2_simulation::saveResults(int n_steps, std::ofstream& outfile){
     }
 }
 
+int P2_simulation::getS(){
+    return S;
+}
+int P2_simulation::getE(){
+    return E;
+}
+int P2_simulation::getI(){
+    return I;
+}
+int P2_simulation::getR(){
+    return R;
+}
 
-
+int P2_simulation::getN(){
+    return N;
+}
 
 
