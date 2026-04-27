@@ -14,6 +14,7 @@ private:
     double beta;
     double sigma;
     double gamma;
+    double reinfect;
 
     Lattice lattice;
     std::vector<Agent> agents;
@@ -33,7 +34,7 @@ private:
 
 public: 
 
-    P2_simulation(int N, double beta, double sigma, double gamma, int L, int seed);
+    P2_simulation(int N, double beta, double sigma, double gamma, double reinfect, int L, int seed);
 
     void saveSnapshot(std::ofstream& snapshotfile, int step);
     void saveResults(int n_steps, std::ofstream& outfile);

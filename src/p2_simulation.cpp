@@ -4,8 +4,8 @@
 #include <algorithm>
 
 
-P2_simulation::P2_simulation(int N, double beta, double sigma, double gamma, int L, int seed)
-    : N(N), beta(beta), sigma(sigma), gamma(gamma), lattice(L),  rng(seed), uniform_dist(0.0, 1.0),
+P2_simulation::P2_simulation(int N, double beta, double sigma, double gamma, double reinfect, int L, int seed)
+    : N(N), beta(beta), sigma(sigma), gamma(gamma),reinfect(reinfect), lattice(L), rng(seed), uniform_dist(0.0, 1.0),
     S(0), E(0), I(0), R(0)
     {
     initAgents(); 
@@ -111,6 +111,22 @@ void P2_simulation::step() {
             }
 
         }
+
+         else if (agent.getState()== Recovered) {
+           if (uniform() < reinfect){
+            int infected_neighbours = lattice.countInfectedNeighbours(agent.getX() , agent.getY());
+            for(int k=0; k < infected_neighbours; k++){
+                if (uniform() < beta){
+                    changeState(agent, Exposed);
+                    R-= 1;
+                    E+= 1;
+
+                    break;
+                }
+            }
+
+        }
+    }
 
     }
 }

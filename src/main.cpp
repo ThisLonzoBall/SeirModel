@@ -108,7 +108,8 @@ int main(int argc, char* argv[]){
         double gamma = std::stod(argv[4]);
         int N = std::stoi(argv[5]);
 
-        int seed = (argc >= 7) ? std::stoi(argv[6]) : 1234;
+        double reinfect = (argc >= 7) ? std::stod(argv[6]) : 0.0;
+        int seed = (argc >= 8) ? std::stoi(argv[7]) : 1234;
 
         int L = 100;
         int n_steps = 2000;
@@ -135,7 +136,7 @@ int main(int argc, char* argv[]){
         }
 
 
-        P2_simulation model2(N, beta, sigma, gamma, L ,seed);
+        P2_simulation model2(N, beta, sigma, gamma, reinfect, L ,seed);
 
         system("mkdir -p results");
 

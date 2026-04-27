@@ -26,18 +26,19 @@ class P1_Wrapper:
 
 
 class P2_Wrapper:
-    def __init__(self, beta=1.0, sigma = 0.1, gamma = 0.005, N=250, 
+    def __init__(self, beta=1.0, sigma = 0.1, reinfect= 0.0, gamma = 0.005, N=250, 
                  seed=1234):
         self.beta = beta
         self.sigma = sigma 
         self.gamma = gamma
         self.N = N
+        self.reinfect = reinfect
         self.seed = seed
 
     def run(self):
         command = ["./seir_sim", "P2",
                    str(self.beta), str(self.sigma), str(self.gamma),
-                   str(self.N), str(self.seed)]
+                   str(self.N), str(self.reinfect), str(self.seed)]
         result = subprocess.run(command, capture_output=True, text=True)
         return result
     def filename(self):
