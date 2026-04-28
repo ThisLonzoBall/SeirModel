@@ -3,12 +3,15 @@ import sys
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Create visuatlisations directly if it does not already exists
 output_dir = "visualisations"
 os.makedirs(output_dir, exist_ok=True)
 
+# Loads in the output file from simulation
 def load(path):
     return pd.read_csv(path)
 
+# Plots P1 graph and saves to path given
 def plot_p1(df, output_file):
     fig, ax = plt.subplots(figsize=(7,4))
     ax.plot(df["t"],df["susceptible"] , label='Susceptible')
@@ -28,6 +31,7 @@ def plot_p1(df, output_file):
     plt.close()
     return fig 
 
+# Plots P2 graph and saves to path given
 def plot_p2(df, output_file):
     fig, ax = plt.subplots(figsize=(7,4))
     ax.plot(df["step"], df["susceptible"], label="Susceptible")
@@ -46,6 +50,7 @@ def plot_p2(df, output_file):
     plt.close()
     return fig 
 
+# Plots snapshots and saves to visualisations/
 def plot_snapshots(df):
     for step in df["step"].unique():
         step_df= df[df["step"] == step]
@@ -73,13 +78,15 @@ def plot_snapshots(df):
 
     
 if __name__ == "__main__":
+    # Checks correct number of arguments provided
     if len(sys.argv) < 3:
         print("Usage: python3 plot.py <mode> <filepath>")
         sys.exit(1)
     
-    mode = sys.argv[1]
-    filepath = sys.argv[2]
+    mode = sys.argv[1] # P1, P2 or snapshots
+    filepath = sys.argv[2] # path to output file from running seir_sim
 
+    # calls appropriate plot function and constructs output path
     if mode == "P1":
         plot_p1(load(filepath), os.path.join(output_dir, os.path.basename(filepath).replace(".txt", ".png")))
     elif mode == "P2":

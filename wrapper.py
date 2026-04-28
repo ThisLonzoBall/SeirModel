@@ -1,6 +1,8 @@
 import subprocess
 import pandas as pd
 
+
+# Python wrapper for ODE simulation (P1_simulation)
 class P1_Wrapper:
     def __init__(self, beta= 1.0, sigma= 1.0, gamma=0.1,
                n_steps= 1000, s0=0.99, e0= 0.01, i0=0.0, r0 = 0.0):
@@ -15,6 +17,7 @@ class P1_Wrapper:
         self.r0 = r0
     
     def run(self):
+        # calls seir_sim with P1 mode
         command = ["./seir_sim", "P1",
                    str(self.beta), str(self.sigma), str(self.gamma),
                    str(self.n_steps), str(self.s0), str(self.e0), str(self.i0), str(self.r0)]
@@ -22,9 +25,11 @@ class P1_Wrapper:
         result = subprocess.run(command, capture_output=True, text=True)
         return result
     def filename(self):
+        # returns output filename
         return f"results/p1_beta{self.beta:.2f}_sigma{self.sigma:.2f}_gamma{self.gamma:.2f}.txt"
 
 
+# Python Wrapper for Monte Carlo simuatlion (p2_simulation)
 class P2_Wrapper:
     def __init__(self, beta=1.0, sigma = 0.1, reinfect= 0.0, gamma = 0.005, N=250, 
                  seed=1234):
@@ -36,11 +41,13 @@ class P2_Wrapper:
         self.seed = seed
 
     def run(self):
+        # calls seir_sim in P2 mode
         command = ["./seir_sim", "P2",
                    str(self.beta), str(self.sigma), str(self.gamma),
                    str(self.N), str(self.reinfect), str(self.seed)]
         result = subprocess.run(command, capture_output=True, text=True)
         return result
     def filename(self):
+        # returns output filename
         return f"results/p2_beta{self.beta:.3f}_sigma{self.sigma:.3f}_gamma{self.gamma:.3f}_N{self.N}.txt"
 

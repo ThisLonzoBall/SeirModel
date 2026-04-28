@@ -10,18 +10,21 @@
 int tests_passed= 0;
 int tests_failed = 0;
 
+// reports result of test and upates test_passed and test_failed variables
 void report(bool passed, const std::string& name){
     if (passed) {
         tests_passed += 1;
-        std::cout << "Pass" << name << "\n";
+        std::cout << "Pass: " << name << "\n";
     }
     else{
         tests_failed += 1;
-        std::cout << "Fail" << name << "\n";
+        std::cout << "Fail: " << name << "\n";
     }
 
 }
 
+
+// tests that updateState() and updatePosition() work correctly
 void testAgentUpdates(){
     Agent agent(0,0, Susceptible);
     agent.updatePosition(6,7);
@@ -35,6 +38,7 @@ void testAgentUpdates(){
     }
 }
 
+// tests that the updateAgent() and moveAgent() work correctly
 void testLatticeMoveAgent(){
     Lattice lattice(10);
     
@@ -50,6 +54,7 @@ void testLatticeMoveAgent(){
 
 }
 
+// tests that countInfectedNeighbours() works correctly
 void testLatticeCountInfectedNeighbours(){
     Lattice lattice(10);
 
@@ -65,6 +70,7 @@ void testLatticeCountInfectedNeighbours(){
     }
 }
 
+// tests that the lattice wraps around at the boundaries correctly
 void testLatticeBoundary(){
     Lattice lattice(10);
 
@@ -78,6 +84,7 @@ void testLatticeBoundary(){
     }
 }
 
+// test that s + e + i + r = 1 for all steps
 void testP1Compartments(){
     P1_simulation sim(1.0, 1.0, 0.1, 0.99, 0.01, 0.0, 0.0, 0.1);
 
@@ -98,7 +105,7 @@ void testP1Compartments(){
     }
 }
 
-
+// test that S + E + I + R = N for all steps
 void testP2Compartments(){
     P2_simulation sim(250,1.0, 0.1, 0.005, 0.0, 100, 42);
 
@@ -122,6 +129,7 @@ void testP2Compartments(){
 int main() {
     std::cout << "SEIR Simulation Tests\n";
 
+    // run all test functions
     testAgentUpdates();
     testLatticeMoveAgent();
     testLatticeBoundary();
@@ -129,6 +137,7 @@ int main() {
     testP1Compartments();
     testP2Compartments();
 
-    std:: cout << "Passed:"<< tests_passed << "Failed:" << tests_failed << "\n";
+    // gives number of tests failed and passsed
+    std:: cout << "Passed:"<< tests_passed << " Failed:" << tests_failed << "\n";
 
 }

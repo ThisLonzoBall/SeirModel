@@ -7,7 +7,7 @@ EXEC = seir_sim
 
 TEST_SRC = src/testing.cpp src/p2_simulation.cpp src/lattice.cpp src/agent.cpp src/p1_simulation.cpp
 TEST_OBJ = $(TEST_SRC:.cpp=.o)
-TEST_EXEC = testing
+TEST_EXEC = run_tests
 
 $(EXEC): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(EXEC)

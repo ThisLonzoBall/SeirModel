@@ -6,4 +6,5 @@ visualisations/
 *.txt
 *.o
 seir_sim
+run_tests
 __pycache__/
