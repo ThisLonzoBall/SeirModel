@@ -120,8 +120,9 @@ Branches:
 - `P1`: ODE simulation implementation
 - `P2`: Monte Carlo simulation implementation
 - `encapsulation`: adding private and public to all classes
-- `CLI arguments`: command line argument parsing and input validation
+- `CLI_arguments`: command line argument parsing and input validation
 - `testing`: unit tests in testing.cpp
+- `wrapping`: adding python wrapper using subprocess
 
 
 ```
